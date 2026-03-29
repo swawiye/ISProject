@@ -9,6 +9,8 @@ import LogIn from './components/LogIn'
 import Profile from './components/Profile'
 import Register from './components/Register'
 import TCDash from './components/TCDash'
+import TCPatients from './components/TCPatients'
+import TCMatches from './components/TCMatches'
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom'
 
 function App() {
@@ -23,9 +25,11 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/' element={<HPDash />} />
+        <Route path='/hp' element={<HPDash />} />
         <Route path='/history' element={<HPHistory />} />
-        <Route path='/tc' element={<TCDash />} />
+        <Route path='/' element={<TCDash />} />
+        <Route path='/patients' element={<TCPatients />} />
+        <Route path='/matches' element={<TCMatches />} />
       </Routes>
     </Router>
   )

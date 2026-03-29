@@ -15,7 +15,7 @@ const navigation = [
     { name: 'Matching Results', href: '/matches', icon: 'fa-solid fa-table-list' }, // show the registration form and patients list at the bottom
 ];
 
-function TCDash() {
+function TCMatches() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -106,4 +106,4 @@ function TCDash() {
     );
 }
 
-export default TCDash;
+export default TCMatches;
