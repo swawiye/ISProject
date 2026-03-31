@@ -10,7 +10,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 
 const navigation = [
-    { name: 'Dashboard', href: '/', icon: 'fa-solid fa-table-columns' }, // 5 recent matches and pending patient verification requests
+    { name: 'Dashboard', href: '/tc', icon: 'fa-solid fa-table-columns' }, // 5 recent matches and pending patient verification requests
     { name: 'Register Patients', href: '/patients', icon: 'fa-solid fa-user-plus' }, // show the registration form and patients list at the bottom
     { name: 'Matching Results', href: '/matches', icon: 'fa-solid fa-table-list' }, // show the registration form and patients list at the bottom
 ];

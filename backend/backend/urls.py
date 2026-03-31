@@ -45,5 +45,6 @@ urlpatterns = [
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/auth/register/', RegisterUserView.as_view(), name='register'),
     path('api/auth/me/', CurrentUserView.as_view(), name='current_user'),
+    # path('api/unified-patients/', UnifiedPatientView.as_view(), name='unified-patient-registration'),
     path('api/', include(router.urls)),
 ]
