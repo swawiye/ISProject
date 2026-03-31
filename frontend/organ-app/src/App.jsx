@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/admin' element={<AdminDash />} />
         <Route path='/reports' element={<AdminReports />} />
         <Route path='/users' element={<AdminUsers />} />
@@ -27,7 +27,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/hp' element={<HPDash />} />
         <Route path='/history' element={<HPHistory />} />
-        <Route path='/' element={<TCDash />} />
+        <Route path='/tc' element={<TCDash />} />
         <Route path='/patients' element={<TCPatients />} />
         <Route path='/matches' element={<TCMatches />} />
       </Routes>

@@ -75,7 +75,7 @@ function AdminDash() {
                             </div>
                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 min-w-0">
                                 <span className="text-xs font-bold text-slate-700 truncate">Administrator</span>
-                                <Link to="/home" className="px-3 py-1.5 bg-[#042d6d] text-white rounded-md text-[10px] font-bold shadow-sm hover:bg-[#154696] hover:shadow transition-all whitespace-nowrap w-fit">
+                                <Link to="/" className="px-3 py-1.5 bg-[#042d6d] text-white rounded-md text-[10px] font-bold shadow-sm hover:bg-[#154696] hover:shadow transition-all whitespace-nowrap w-fit">
                                     Log Out
                                 </Link>
                             </div>

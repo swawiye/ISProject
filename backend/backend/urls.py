@@ -20,7 +20,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from accounts.views import UserViewSet
+from accounts.views import UserViewSet, RegisterUserView, CurrentUserView
 from hospitals.views import HospitalViewSet
 from patients.views import PatientViewSet, DonorViewSet, RecipientViewSet
 from medical_records.views import MedicalRecordViewSet
@@ -41,7 +41,9 @@ router.register(r'reports', SystemReportViewSet, basename='reports')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/v1/', include(router.urls)),
+    path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/register/', RegisterUserView.as_view(), name='register'),
+    path('api/auth/me/', CurrentUserView.as_view(), name='current_user'),
+    path('api/', include(router.urls)),
 ]

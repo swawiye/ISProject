@@ -1,28 +1,94 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 function LogIn() {
-    return (
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      // 1. Get JWT Tokens
+      const tokenResponse = await axios.post('http://127.0.0.1:8000/api/auth/token/', {
+        email: formData.email, // Since USERNAME_FIELD='email' in Django
+        password: formData.password,
+      });
+
+      const { access, refresh } = tokenResponse.data;
+
+      // Store tokens
+      localStorage.setItem('access_token', access);
+      localStorage.setItem('refresh_token', refresh);
+
+      // 2. Fetch User Details to get the role
+      const userResponse = await axios.get('http://127.0.0.1:8000/api/auth/me/', {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      });
+
+      const userRole = userResponse.data.role;
+
+      // Store user role locally for easy frontend usage
+      localStorage.setItem('user_role', userRole);
+
+      // 3. Redirect based on role
+      if (userRole === 'COORDINATOR') {
+        navigate('/tc');
+      } else if (userRole === 'HEALTHCARE_PROFESSIONAL') {
+        navigate('/hp');
+      } else if (userRole === 'ADMINISTRATOR') {
+        navigate('/admin');
+      } else {
+        navigate('/'); // Default
+      }
+    } catch (err) {
+      console.error(err);
+      setError(
+        err.response?.data?.detail ||
+        'Invalid credentials. Please try again.'
+      );
+    }
+  };
+
+  return (
     <div>
       <div className="flex items-center justify-center min-h-screen bg-[#042d6d]">
         <form
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6"
         >
           <h2 className="text-2xl font-bold text-center text-[#042d6d]">
             Welcome Back !
           </h2>
 
-          {/* {error && <p className="text-red-500 text-center">{}</p>} */}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+
           <div>
             <label className="block mb-1">Email address</label>
             <input
               type="email"
               name="email"
-              // value={form.email}
-              // onChange={handleChange}
+              value={formData.email}
+              onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#042d6d]"
               placeholder="Enter your email"
+              required
             />
           </div>
 
@@ -31,10 +97,11 @@ function LogIn() {
             <input
               type="password"
               name="password"
-              // value={form.password}
-              // onChange={handleChange}
+              value={formData.password}
+              onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#042d6d]"
               placeholder="Enter your password"
+              required
             />
           </div>
 
@@ -44,10 +111,17 @@ function LogIn() {
           >
             Log In
           </button>
+
+          <p className="text-sm text-center text-gray-500">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-[#042d6d] hover:underline">
+              Sign up
+            </Link>
+          </p>
         </form>
       </div>
     </div>
-    )
+  )
 }
 
 export default LogIn;
