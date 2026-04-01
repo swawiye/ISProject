@@ -41,7 +41,7 @@ function Home() {
                         </p>
                     </div>
 
-                    {/* Vertical divider (hidden on mobile, visible on md+) */}
+                    {/* Vertical divider */}
                     <div className="hidden md:block w-px bg-gray-300 mx-6"></div>
 
                     {/* Right column */}
