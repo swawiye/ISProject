@@ -41,10 +41,10 @@ router.register(r'reports', SystemReportViewSet, basename='reports')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/auth/register/', RegisterUserView.as_view(), name='register'),
-    path('api/auth/me/', CurrentUserView.as_view(), name='current_user'),
-    # path('api/unified-patients/', UnifiedPatientView.as_view(), name='unified-patient-registration'),
-    path('api/', include(router.urls)),
+    path('api/v1/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/auth/register/', RegisterUserView.as_view(), name='register'),
+    path('api/v1/auth/me/', CurrentUserView.as_view(), name='current_user'),
+    # path('api/v1/unified-patients/', UnifiedPatientView.as_view(), name='unified-patient-registration'),
+    path('api/v1/', include(router.urls)),
 ]
